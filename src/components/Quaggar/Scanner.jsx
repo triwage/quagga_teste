@@ -1,6 +1,6 @@
-import React, { useCallback, useLayoutEffect } from 'react';
-import PropTypes from 'prop-types';
-import Quagga from '@ericblade/quagga2';
+import React, { useCallback, useLayoutEffect } from "react";
+import PropTypes from "prop-types";
+import Quagga from "@ericblade/quagga2";
 import { validarBoleto } from "@mrmgomes/boleto-utils"
 
 function getMedian(arr) {
@@ -24,7 +24,7 @@ const defaultConstraints = {
 };
 
 const defaultLocatorSettings = {
-    patchSize: 'medium',
+    patchSize: "medium",
     halfSample: true,
 };
 
@@ -57,36 +57,36 @@ const Scanner = ({
         const drawingCtx = Quagga.canvas.ctx.overlay;
         const drawingCanvas = Quagga.canvas.dom.overlay;
         drawingCtx.font = "24px Arial";
-        drawingCtx.fillStyle = 'green';
+        drawingCtx.fillStyle = "green";
 
         if (result) {
-            // console.warn('* quagga onProcessed', result);
+            // console.warn("* quagga onProcessed", result);
             const boletoValido = validarBoleto(result.codeResult.code)
-            let elemento = document.getElementById('resultado');
+            let elemento = document.getElementById("resultado");
             if (boletoValido.sucesso) {
                 const data = (new Date()).toLocaleString();
                 elemento.innerText = `Último sucesso ${data} : => ` + boletoValido.mensagem;
                 drawingCtx.font = "24px Arial";
                 drawingCtx.fillText(result.codeResult.code, 10, 20);
             // } else {
-                // elemento.innerText = '';
+                // elemento.innerText = "";
             }
             if (result.boxes) {
-                drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute('width')), parseInt(drawingCanvas.getAttribute('height')));
+                drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
                 result.boxes.filter((box) => box !== result.box).forEach((box) => {
-                    Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, { color: 'purple', lineWidth: 2 });
+                    Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, { color: "purple", lineWidth: 2 });
                 });
             }
             if (result.box) {
-                Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: 'blue', lineWidth: 2 });
+                Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: "blue", lineWidth: 2 });
             }
             if (result.codeResult && result.codeResult.code) {
                     drawingCtx.font = "24px Arial";
                     drawingCtx.fillText(result.codeResult.code, 10, 20);
                 // const validated = barcodeValidator(result.codeResult.code);
                 // const validated = validateBarcode(result.codeResult.code);
-                // Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: validated ? 'green' : 'red', lineWidth: 3 });
-                // drawingCtx.fillStyle = validated ? 'green' : 'red';
+                // Quagga.ImageDebug.drawPath(result.line, { x: "x", y: "y" }, drawingCtx, { color: validated ? "green" : "red", lineWidth: 3 });
+                // drawingCtx.fillStyle = validated ? "green" : "red";
                 // drawingCtx.fillText(`${result.codeResult.code} valid: ${validated}`, 10, 50);
                 // if (validated) {
                 //     onDetected(result);
@@ -98,7 +98,7 @@ const Scanner = ({
     useLayoutEffect(() => {
         Quagga.init({
             inputStream: {
-                type: 'LiveStream',
+                type: "LiveStream",
                 constraints: {
                     ...constraints,
                     ...(cameraId && { deviceId: cameraId }),
@@ -114,7 +114,7 @@ const Scanner = ({
             Quagga.onProcessed(handleProcessed);
 
             if (err) {
-                return console.log('Error starting Quagga:', err);
+                return console.log("Error starting Quagga:", err);
             }
             if (scannerRef && scannerRef.current) {
                 Quagga.start();

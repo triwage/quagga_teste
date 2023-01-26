@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Scanner from "./Scanner";
 import Result from "./Result";
 
-const App = () => {
+const Quaggar = () => {
   const [scanning, setScanning] = useState(false);
   const [results, setResults] = useState([]);
   const scannerRef = useRef(null);
@@ -49,4 +49,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Quaggar;
