@@ -22,10 +22,8 @@ function getMedianOfCodeErrors(decodedCodes) {
 }
 
 const defaultConstraints = {
-          width: 500,
-          height: 500,
-          aspectRatio: {min: 1, max: 100},
-          facingMode: "environment" // or user
+          width: 800,
+          height: 600,
 };
 
 const defaultLocatorSettings = {
