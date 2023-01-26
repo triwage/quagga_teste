@@ -21,6 +21,7 @@ const Quaggar = () => {
       </ul>
       <span id="resultado"></span>
       <div
+        id="interactive" className="viewport"
         ref={scannerRef}
         style={{ position: "relative", border: "3px solid red" }}
       >
@@ -30,18 +31,13 @@ const Quaggar = () => {
           style={{
             position: "absolute",
             top: "0px",
-            // left: '0px',
-            // height: '300px',
-            // width: '800px',
-            // border: '3px solid green',
           }}
-          width="800"
-          height="600"
         />
         {scanning ? (
           <Scanner
             scannerRef={scannerRef}
             onDetected={(result) => setResults([...results, result])}
+            facingMode="environment"
           />
         ) : null}
       </div>

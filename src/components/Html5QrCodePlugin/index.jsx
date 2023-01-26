@@ -6,7 +6,7 @@ let camera = undefined;
 
 class Html5QrcodePlugin extends React.Component {
   render() {
-    return <div id={qrcodeRegionId} />;
+    return <div id={qrcodeRegionId} style={{display: 'flex', flexDirection: 'column'}}/>;
   }
 
   componentWillUnmount() {
@@ -43,7 +43,7 @@ class Html5QrcodePlugin extends React.Component {
       // var config = createConfig(this.props);
       const config = {
         fps: 100,
-        qrbox: {width: 400, height: 100},
+        // qrbox: {width: 400, height: 100},
         aspectRatio: 1.66667,
         formatsToSupport: [
           0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10, 11, 12, 13, 14, 15, 16,

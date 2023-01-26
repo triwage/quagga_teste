@@ -16,8 +16,8 @@ class Html5QrCodePluginPage extends Component {
   render() {
     const {codigo} = this.state;
     return (
-      <div>
-        <h1>{codigo !== '' ? codigo : <>Html5Qrcode React example!</>} </h1>
+      <div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
+        <h3>{codigo !== '' ? codigo : <></>}</h3>
         <Html5QrcodePlugin
           fps={10}
           disableFlip={true}
