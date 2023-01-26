@@ -4,8 +4,8 @@
 }
 
 #interactive.viewport > canvas, #interactive.viewport > video {
-    max-width: 100%;
-    width: 100%;
+    max-width: 99vw;
+    width: 99vw;
 }
 
 canvas.drawing, canvas.drawingBuffer {

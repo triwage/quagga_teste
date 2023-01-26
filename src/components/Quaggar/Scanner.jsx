@@ -22,16 +22,10 @@ function getMedianOfCodeErrors(decodedCodes) {
 }
 
 const defaultConstraints = {
-  width: {min: document.body.clientWidth},
-  height: {min: document.body.clientHeight},
-  aspectRatio: {min:1, max: 100},
-  facingMode: "enviroment"
-    //   constraints: {
-    //       width: {max: document.client},
-    //       height: {min: 480},
-    //       aspectRatio: {min: 1, max: 100},
-    //       facingMode: "environment" // or user
-    //   },  
+          width: 500,
+          height: 500,
+          aspectRatio: {min: 1, max: 100},
+          facingMode: "environment" // or user
 };
 
 const defaultLocatorSettings = {
