@@ -22,17 +22,43 @@ function getMedianOfCodeErrors(decodedCodes) {
 }
 
 const defaultConstraints = {
-          width: 800,
-          height: 600,
+          // width: 800,
+          // height: 600,
+          width: {min: 640},
+          height: {min: 480},
+          facingMode: "environment",
+          aspectRatio: {min: 1, max: 2}
 };
 
 const defaultLocatorSettings = {
-  patchSize: "medium",
   halfSample: true,
+  patchSize: "medium", // x-small, small, medium, large, x-large
+  debug: {
+    showCanvas: false,
+    showPatches: false,
+    showFoundPatches: false,
+    showSkeleton: false,
+    showLabels: false,
+    showPatchLabels: false,
+    showRemainingPatchLabels: false,
+    boxFromPatches: {
+      showTransformed: false,
+      showTransformedBox: false,
+      showBB: false
+    }
+  }  
 };
 
 // const defaultDecoders = ["i2of5_reader", "2of5_reader", "ean_reader","ean_8_reader","code_39_reader","code_39_vin_reader","codabar_reader","","upc_reader","upc_e_reader","code_93_reader"];
-const defaultDecoders = ["i2of5_reader", "2of5_reader"];
+// const defaultDecoders = ["i2of5_reader", "2of5_reader"];
+const defaultDecoders = [{
+  format: "i2of5_reader",
+  config: {
+      supplements: [
+          '2of5_reader'
+      ]
+  }
+}]
 
 const Scanner = ({
   onDetected,
@@ -53,9 +79,9 @@ const Scanner = ({
       }
       const err = getMedianOfCodeErrors(result.codeResult.decodedCodes);
       // if Quagga is at least 75% certain that it read correctly, then accept the code.
-      // if (err < 0.25) {
+      if (err < 0.25) {
       onDetected(result.codeResult.code);
-      // }
+      }
     },
     [onDetected]
   );
@@ -101,7 +127,7 @@ const Scanner = ({
           lineWidth: 2,
         });
       }
-      if (result.codeResult && result.codeResult.code) {
+      if (result.codeResult && result.codeResult.code && boletoValido.sucesso) {
         drawingCtx.font = "24px Arial";
         drawingCtx.fillText(result.codeResult.code, 10, 20);
         // const validated = barcodeValidator(result.codeResult.code);
@@ -140,13 +166,9 @@ const Scanner = ({
               ...(cameraId && { deviceId: cameraId }),
               ...(!cameraId && { facingMode }),
           },
-    //   constraints: {
-    //       width: {max: document.client},
-    //       height: {min: 480},
-    //       aspectRatio: {min: 1, max: 100},
-    //       facingMode: "environment" // or user
-    //   },
-      target: scannerRef.current,
+          numOfWorkers: 2,
+          frequency: 10,
+          target: scannerRef.current,
         },
         locator,
         numOfWorkers,
