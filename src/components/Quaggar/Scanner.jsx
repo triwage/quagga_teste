@@ -94,12 +94,12 @@ const Scanner = ({
 
     if (result) {
       // console.warn("* quagga onProcessed", result);
-      const boletoValido = validarBoleto(result.codeResult.code);
+      const boletoValido = validarBoleto(result?.codeResult?.code);
       let elemento = document.getElementById("resultado");
       if (boletoValido.sucesso) {
         const data = new Date().toLocaleString();
         elemento.innerText =
-          `Último sucesso ${data} : => ` + boletoValido.mensagem;
+          `Último sucesso ${data} : => ` + boletoValido.codigoBarras;
         drawingCtx.font = "24px Arial";
         drawingCtx.fillText(result.codeResult.code, 10, 20);
         // } else {

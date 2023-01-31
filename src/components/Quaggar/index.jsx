@@ -19,7 +19,6 @@ const Quaggar = () => {
             )
         )}
       </ul>
-      <span id="resultado"></span>
       <div
         id="interactive" className="viewport"
         ref={scannerRef}
