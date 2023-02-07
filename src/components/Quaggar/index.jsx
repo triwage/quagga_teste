@@ -11,12 +11,29 @@ const Quaggar = () => {
   const [results, setResults] = useState([])
   const scannerRef = useRef(null)
 
+
+  function handleOpenScanning() {
+    if (typeof (window) !== 'undefined') {
+      if (!document.fullscreenElement) {
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        document.documentElement.requestFullscreen()
+
+        void window.screen.orientation.lock('landscape')
+        setScanning(true)
+      } else if (document.exitFullscreen) {
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        document.exitFullscreen()
+      }
+      setScanning(!scanning)
+    }
+  }
+
   return (
     // @ts-expect-error
     <DeviceOrientation lockOrientation={'landscape'}>
       <Orientation orientation={'landscape'} alwaysRender={false}>
         <div className="h-screen w-screen">
-          <button onClick={() => setScanning(!scanning)}>
+          <button onClick={handleOpenScanning}>
             {scanning ? "Stop" : "Start"}
           </button>
           <ul className="results">

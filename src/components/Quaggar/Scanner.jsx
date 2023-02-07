@@ -101,7 +101,6 @@ const Scanner = ({
         elemento.innerText =
           `Último sucesso ${data} : => ` + boletoValido.mensagem;
         drawingCtx.font = "24px Arial";
-        alert(result.codeResult.code)
         drawingCtx.fillText(result.codeResult.code, 10, 20);
         // } else {
         // elemento.innerText = "";
