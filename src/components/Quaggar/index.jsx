@@ -15,7 +15,7 @@ const Quaggar = () => {
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen();
 
-      void window.screen.orientation.lock("landscape");
+      screen.orientation.lock("landscape");
       setScanning(!scanning);
     }
   }
