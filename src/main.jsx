@@ -8,6 +8,7 @@ import ErrorPage from "./error-page";
 import "./index.css"
 import Html5QrCodePluginPage from "./routes/html5qrcodeplugin";
 import Quaggar2Page from "./routes/quaggar2";
+import Quaggar1Page from "./routes/quagga1";
 import QuaggarPage from "./routes/quagga";
 import Root from "./routes/root";
 
@@ -18,8 +19,12 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />    
   },
   {
-    path: "teste",
+    path: "i2of5_reader",
     element: <QuaggarPage />,
+  },
+  {
+    path: "2of5_reader",
+    element: <Quaggar1Page />,
   },
   {
     path: "quaggar2",

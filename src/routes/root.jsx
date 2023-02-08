@@ -7,8 +7,11 @@ export default function Root() {
           <h1>Exemplos de camera</h1>
           <nav>
             <ul>
+            <li>
+                <a href={`/i2of5_reader`}>i2of5_reader</a>
+              </li>
               <li>
-                <a href={`/teste`}>Quaggar</a>
+                <a href={`/2of5_reader`}>2of5_reader</a>
               </li>
               <li>
                 <a href={`/quaggar2`}>Quaggar2</a>

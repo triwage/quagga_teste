@@ -26,7 +26,7 @@ class Scanner extends Component {
         },
         numOfWorkers: 2,
         decoder: {
-          readers: ['i2of5_reader'],
+          readers: ['2of5_reader'],
         },
         locate: true,
       },
@@ -68,7 +68,7 @@ class Result extends Component {
   }
 }
 
-class QuaggarPage extends Component {
+class Quaggar1Page extends Component {
   state = {
     scanning: false,
     results: [],
@@ -104,4 +104,4 @@ class QuaggarPage extends Component {
   }
 }
 
-export default QuaggarPage;
+export default Quaggar1Page;
