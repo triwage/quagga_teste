@@ -12,10 +12,12 @@ const Quaggar = () => {
   const scannerRef = useRef(null);
 
   function handleOpenScanning() {
-    document.documentElement.requestFullscreen();
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
 
-    void window.screen.orientation.lock("landscape");
-    setScanning(!scanning);
+      void window.screen.orientation.lock("landscape");
+      setScanning(!scanning);
+    }
   }
 
   return (
