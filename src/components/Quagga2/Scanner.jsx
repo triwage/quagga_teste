@@ -22,31 +22,31 @@ function getMedianOfCodeErrors(decodedCodes) {
 }
 
 const defaultConstraints = {
-          // width: 800,
-          // height: 600,
-          width: {min: 640},
-          height: {min: 480},
-          facingMode: "environment",
-          aspectRatio: {min: 1, max: 2}
+          width: 640,
+          height: 480,
+          // width: {min: 800},
+          // height: {min: 600},
+          // facingMode: "environment",
+          // aspectRatio: {min: 1, max: 2}
 };
 
 const defaultLocatorSettings = {
   halfSample: true,
   patchSize: "medium", // x-small, small, medium, large, x-large
-  debug: {
-    showCanvas: false,
-    showPatches: false,
-    showFoundPatches: false,
-    showSkeleton: false,
-    showLabels: false,
-    showPatchLabels: false,
-    showRemainingPatchLabels: false,
-    boxFromPatches: {
-      showTransformed: false,
-      showTransformedBox: false,
-      showBB: false
-    }
-  }  
+  // debug: {
+  //   showCanvas: false,
+  //   showPatches: false,
+  //   showFoundPatches: false,
+  //   showSkeleton: false,
+  //   showLabels: false,
+  //   showPatchLabels: false,
+  //   showRemainingPatchLabels: false,
+  //   boxFromPatches: {
+  //     showTransformed: false,
+  //     showTransformedBox: false,
+  //     showBB: false
+  //   }
+  // }  
 };
 
 // const defaultDecoders = ["i2of5_reader", "2of5_reader", "ean_reader","ean_8_reader","code_39_reader","code_39_vin_reader","codabar_reader","","upc_reader","upc_e_reader","code_93_reader"];
@@ -60,7 +60,7 @@ const defaultDecoders = [{
   }
 }]
 
-const Scanner = ({
+const ScannerQuagga2 = ({
   onDetected,
   scannerRef,
   onScannerReady,
@@ -141,39 +141,26 @@ const Scanner = ({
       }
     }
   };
-  // inputStream: {
-  //     type: "LiveStream",
-  //     constraints: {
-  //         width: {max: 1000},
-  //         height: {min: 480},
-  //         aspectRatio: {min: 1, max: 100},
-  //         facingMode: "environment" // or user
-  //     },
-  //     target: scannerRef.current,
-  // },
-  // locator,
-  // numOfWorkers,
-  // frequency: 10,
-  // decoder: { readers: decoders },
-  // locate,
   useLayoutEffect(() => {
     Quagga.init(
       {
         inputStream: {
           type: "LiveStream",
           constraints: {
-              ...constraints,
-              ...(cameraId && { deviceId: cameraId }),
-              ...(!cameraId && { facingMode }),
+            width: 640,
+            height: 480,
+            facing: "environment" // or user
           },
           numOfWorkers: 2,
-          frequency: 10,
           target: scannerRef.current,
         },
-        locator,
-        numOfWorkers,
-        decoder: { readers: decoders },
-        locate,
+        locator:{
+          patchSize: 'medium',
+          halfSample: true
+        },
+        numOfWorkers: 2,
+        decoder: { readers: ["2of5_reader", "i2of5_reader"] },
+        locate: true,
       },
       (err) => {
         Quagga.onProcessed(handleProcessed);
@@ -209,7 +196,7 @@ const Scanner = ({
   return null;
 };
 
-Scanner.propTypes = {
+ScannerQuagga2.propTypes = {
   onDetected: PropTypes.func.isRequired,
   scannerRef: PropTypes.object.isRequired,
   onScannerReady: PropTypes.func,
@@ -222,4 +209,4 @@ Scanner.propTypes = {
   locate: PropTypes.bool,
 };
 
-export default Scanner;
+export default ScannerQuagga2;

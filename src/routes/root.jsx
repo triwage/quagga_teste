@@ -8,7 +8,10 @@ export default function Root() {
           <nav>
             <ul>
               <li>
-                <a href={`/quaggar`}>Quaggar</a>
+                <a href={`/teste`}>Quaggar</a>
+              </li>
+              <li>
+                <a href={`/quaggar2`}>Quaggar2</a>
               </li>
               <li>
                 <a href={`/html5qrcodeplugin`}>HrmlQrCodePlugin</a>

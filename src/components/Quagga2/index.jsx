@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import Scanner from "./Scanner";
+import ScannerQuagga2 from "./Scanner";
 import Result from "./Result";
 
-const Quaggar = () => {
+const Quaggar2 = () => {
   const [scanning, setScanning] = useState(false);
   const [results, setResults] = useState([]);
   const scannerRef = useRef(null);
@@ -45,7 +45,7 @@ const Quaggar = () => {
           }}
         />
         {scanning ? (
-          <Scanner
+          <ScannerQuagga2
             scannerRef={scannerRef}
             onDetected={(result) => setResults([...results, result])}
             facingMode="environment"
@@ -56,4 +56,4 @@ const Quaggar = () => {
   );
 };
 
-export default Quaggar;
+export default Quaggar2;
