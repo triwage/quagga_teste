@@ -1,31 +1,22 @@
 // @ts-nocheck
-import { useState, useRef } from "react";
+import { useState, useRef } from "react"
 
-import Result from "./Result";
-import Scanner from "./Scanner";
+import Result from "./Result"
+import Scanner from "./Scanner"
 
-import DeviceOrientation, { Orientation } from "react-screen-orientation";
+import DeviceOrientation, { Orientation } from 'react-screen-orientation'
 
 const Quaggar = () => {
-  const [scanning, setScanning] = useState(false);
-  const [results, setResults] = useState([]);
-  const scannerRef = useRef(null);
-
-  function handleOpenScanning() {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-
-      screen.orientation.lock("landscape");
-      setScanning(!scanning);
-    }
-  }
+  const [scanning, setScanning] = useState(false)
+  const [results, setResults] = useState([])
+  const scannerRef = useRef(null)
 
   return (
     // @ts-expect-error
-    <DeviceOrientation lockOrientation={"landscape"}>
-      <Orientation orientation={"landscape"} alwaysRender={false}>
+    <DeviceOrientation lockOrientation={'landscape'}>
+      <Orientation orientation={'landscape'} alwaysRender={false}>
         <div className="h-screen w-screen">
-          <button onClick={handleOpenScanning}>
+          <button onClick={() => setScanning(!scanning)}>
             {scanning ? "Stop" : "Start"}
           </button>
           <ul className="results">
@@ -33,12 +24,11 @@ const Quaggar = () => {
               (result) =>
                 result.codeResult && (
                   <Result key={result.codeResult.code} result={result} />
-                )
+                ),
             )}
           </ul>
           <div
-            id="interactive"
-            className="viewport"
+            id="interactive" className="viewport"
             ref={scannerRef}
             style={{ position: "relative" }}
           >
@@ -61,7 +51,7 @@ const Quaggar = () => {
         </div>
       </Orientation>
     </DeviceOrientation>
-  );
-};
+  )
+}
 
-export default Quaggar;
+export default Quaggar
