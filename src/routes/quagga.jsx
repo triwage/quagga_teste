@@ -1,32 +1,32 @@
-import React, { Component } from 'react';
-import Quagga from 'quagga';
-import { validarBoleto } from '@mrmgomes/boleto-utils';
+import React, { Component } from "react";
+import Quagga from "quagga";
+import { validarBoleto } from "@mrmgomes/boleto-utils";
 
 class Scanner extends Component {
   componentDidMount = () => {
     if (!document.fullscreenElement) {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        document.documentElement.requestFullscreen();
-  
-        void window.screen.orientation.lock("landscape");
-      }
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      document.documentElement.requestFullscreen();
+
+      void window.screen.orientation.lock("landscape");
+    }
     Quagga.init(
       {
         inputStream: {
-          type: 'LiveStream',
+          type: "LiveStream",
           constraints: {
             width: 640,
             height: 480,
-            facing: 'environment', // or user
+            facing: "environment", // or user
           },
         },
         locator: {
-          patchSize: 'medium',
+          patchSize: "medium",
           halfSample: true,
         },
         numOfWorkers: 2,
         decoder: {
-          readers: ['i2of5_reader'],
+          readers: ["i2of5_reader"],
         },
         locate: true,
       },
@@ -60,11 +60,7 @@ class Result extends Component {
     if (!result) {
       return null;
     }
-    return (
-      <li>
-        {result.codeResult.code} [{result.codeResult.format}]
-      </li>
-    );
+    return <li>lido : {result.linhaDigitavel}</li>;
   }
 }
 
@@ -83,7 +79,8 @@ class QuaggarPage extends Component {
     const boletoValido = validarBoleto(result.codeResult.code);
     if (boletoValido.sucesso) {
       console.log(result.codeResult.code);
-      this.setState({ results: this.state.results.concat([result]) });
+      this.setState({ results: this.state.results.concat([boletoValido]) });
+      // this.setState({ results: this.state.results.concat([result]) });
     }
   };
 
@@ -91,11 +88,11 @@ class QuaggarPage extends Component {
     return (
       <div>
         <button onClick={this._scan}>
-          {this.state.scanning ? 'Stop' : 'Start'}
+          {this.state.scanning ? "Stop" : "Start"}
         </button>
         <ul className="results">
           {this.state.results.map((result) => (
-            <Result key={result.codeResult.code} result={result} />
+            <Result key={result.linhaDigitavel} result={result} />
           ))}
         </ul>
         {this.state.scanning ? <Scanner onDetected={this._onDetected} /> : null}
