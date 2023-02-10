@@ -62,7 +62,7 @@ class Result extends Component {
     }
     return (
       <li>
-        {result.linhaDigitavel}
+        lido : {result.linhaDigitavel}
       </li>
     );
   }
