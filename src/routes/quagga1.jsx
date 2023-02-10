@@ -62,7 +62,7 @@ class Result extends Component {
     }
     return (
       <li>
-        {result.codeResult.code} [{result.codeResult.format}]
+        {result.linhaDigitavel}
       </li>
     );
   }
@@ -83,7 +83,7 @@ class Quaggar1Page extends Component {
     const boletoValido = validarBoleto(result.codeResult.code);
     if (boletoValido.sucesso) {
       console.log(result.codeResult.code);
-      this.setState({ results: this.state.results.concat([result]) });
+      this.setState({ results: this.state.results.concat([boletoValido]) });
     }
   };
 
@@ -95,7 +95,7 @@ class Quaggar1Page extends Component {
         </button>
         <ul className="results">
           {this.state.results.map((result) => (
-            <Result key={result.codeResult.code} result={result} />
+            <Result key={result.linhaDigitavel} result={result} />
           ))}
         </ul>
         {this.state.scanning ? <Scanner onDetected={this._onDetected} /> : null}
